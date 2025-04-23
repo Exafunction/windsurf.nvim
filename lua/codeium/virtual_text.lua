@@ -484,7 +484,7 @@ end
 
 function M.debounced_complete()
 	M.clear()
-	if config.options.virtual_text.manual or not server.is_healthy() or not M.filetype_enabled(vim.fn.bufnr("")) then
+	if config.options.virtual_text.manual or not server:is_healthy() or not M.filetype_enabled(vim.fn.bufnr("")) then
 		return
 	end
 	local current_buf = vim.fn.bufnr("")
