@@ -171,7 +171,7 @@ local function completion_inserter(current_completion, insert_text)
 
 	local cursor_text = delta == 0 and "" or '<C-O>:exe "go" line2byte(line("."))+col(".")+(' .. delta .. ")<CR>"
 
-	server.accept_completion(current_completion.completion.completionId)
+	server:accept_completion(current_completion.completion.completionId)
 
 	return '<C-g>u' .. delete_range .. insert_text .. cursor_text
 end
@@ -438,7 +438,7 @@ function M.complete(opts)
 
 	codeium_status = "waiting"
 
-	local cancel = server.request_completion(
+	local cancel = server:request_completion(
 		data.document,
 		data.editor_options,
 		data.other_documents,
