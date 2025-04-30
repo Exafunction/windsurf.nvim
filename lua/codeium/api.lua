@@ -201,7 +201,9 @@ function Server:start()
 	self.current_cookie = next_cookie()
 
 	if not api_key then
-		io.timer(1000, 0, self:start())
+		io.timer(1000, 0, function()
+			self:start()
+		end)
 		return
 	end
 
