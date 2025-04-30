@@ -343,7 +343,7 @@ function M.gunzip(path, callback)
 			vim.o.shell = "powershell"
 		end
 		vim.o.shellcmdflag =
-		"-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.Encoding]::UTF8;"
+			"-NoLogo -NoProfile -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.Encoding]::UTF8;"
 		vim.o.shellredir = "2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode"
 		vim.o.shellpipe = "2>&1 | Out-File -Encoding UTF8 %s; exit $LastExitCode"
 		vim.o.shellquote = ""
@@ -402,9 +402,9 @@ function M.post(url, params)
 	local tmpfname = os.tmpname()
 
 	if type(params.body) == "table" then
-		local f = io.open(tmpfname, 'w+')
+		local f = io.open(tmpfname, "w+")
 		if f == nil then
-			log.error('Cannot open temporary message file: ' .. tmpfname)
+			log.error("Cannot open temporary message file: " .. tmpfname)
 			return
 		end
 		f:write(vim.fn.json_encode(params.body))
@@ -437,7 +437,16 @@ function M.post(url, params)
 		end
 	end
 
-	curl.post(url, params)
+	local ok, obj = pcall(curl.post, url, params)
+	if not ok then
+		local err = tostring(obj)
+		if err:find("Failed to spawn process") then
+			local reason = err:gsub('pid = "(.*)"', "%1")
+			vim.notify("Failed to spawn curl: " .. reason, vim.log.levels.ERROR)
+		else
+			error(err)
+		end
+	end
 end
 
 function M.shell_open(url)
