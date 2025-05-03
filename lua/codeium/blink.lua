@@ -112,6 +112,12 @@ function M:get_completions(ctx, callback)
 	local line_ending = util.get_newline(bufnr)
 	local line_ending_len = utf8len(line_ending)
 	local editor_options = util.get_editor_options(bufnr)
+	local buf_name = vim.api.nvim_buf_get_name(bufnr)
+
+	if buf_name == "" then
+		callback(nil)
+		return function() end
+	end
 
 	-- We need to calculate the number of bytes prior to the current character,
 	-- that starts with all the prior lines
@@ -157,7 +163,7 @@ function M:get_completions(ctx, callback)
 			editor_language = filetype,
 			language = language,
 			cursor_position = { row = cursor[1] - 1, col = cursor[2] },
-			absolute_uri = util.get_uri(vim.api.nvim_buf_get_name(bufnr)),
+			absolute_uri = util.get_uri(buf_name),
 			workspace_uri = util.get_uri(util.get_project_root()),
 			line_ending = line_ending,
 			cursor_offset = cursor_offset,
