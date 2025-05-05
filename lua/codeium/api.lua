@@ -234,7 +234,7 @@ function Server:start()
 	end
 
 	local function on_output(_, v, j)
-		log.debug(j.pid .. ": " .. v)
+		log.debug(j.pid .. ": " .. (v or "v is null"))
 	end
 
 	local api_server_url = "https://"
@@ -286,7 +286,7 @@ function Server:start()
 		table.insert(job_args, "--detect_proxy=" .. tostring(config.options.detect_proxy))
 	end
 
-	self.job = io.job(job_args)
+	self.job = io.job(job_args, config.options.env)
 	self.job:start()
 
 	local function start_heartbeat()
