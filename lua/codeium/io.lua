@@ -236,7 +236,7 @@ function M.get_system_info()
 end
 
 ---@return plenary.Job
-function M.job(cmd)
+function M.job(cmd, env)
 	local o = config.options
 	local tool_name = cmd[1]
 	local tool = o.tools[tool_name]
@@ -272,6 +272,9 @@ function M.job(cmd)
 	end
 
 	local result = {}
+	if env then
+		result.env = env
+	end
 	result.args = {}
 
 	for k, v in pairs(cmd) do

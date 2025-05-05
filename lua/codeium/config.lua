@@ -25,6 +25,8 @@ function M.defaults()
 		search_max_workspace_file_count = 5000,
 		file_watch_max_dir_count = 50000,
 		enable_cmp_source = true,
+		env = { ["someproxy"] = "some url" }, -- kinba
+		mute_notify = true, -- kinba
 		virtual_text = {
 			enabled = false,
 			filetypes = {},
