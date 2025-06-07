@@ -1,6 +1,6 @@
 return {
 	line_endings = {
-		dos = "\r\n",
+		dos = "\n",
 		unix = "\n",
 		mac = "\r",
 	},
