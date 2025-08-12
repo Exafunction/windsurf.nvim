@@ -6,7 +6,7 @@ local M = {}
 function M.fallback_call(calls, with_filter, fallback_value)
 	for _, i in ipairs(calls) do
 		local ok, result = pcall(unpack(i))
-		if ok and (with_filter ~= nil and with_filter(result)) then
+		if ok and (with_filter == nil or with_filter(result)) then
 			return result
 		end
 	end
