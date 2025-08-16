@@ -234,7 +234,9 @@ function Server:start()
 	end
 
 	local function on_output(_, v, j)
-		log.debug(j.pid .. ": " .. v)
+		local pid = j and j.pid or "unknown"
+		local msg = v and tostring(v) or "[no output]"
+		log.debug(pid .. ": " .. msg)
 	end
 
 	local api_server_url = "https://"
