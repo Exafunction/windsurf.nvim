@@ -173,7 +173,7 @@ local function completion_inserter(current_completion, insert_text)
 
 	server:accept_completion(current_completion.completion.completionId)
 
-	return '<C-g>u' .. delete_range .. insert_text .. cursor_text
+	return "<C-g>u" .. delete_range .. insert_text .. cursor_text
 end
 
 function M.accept()
@@ -437,6 +437,7 @@ function M.complete(opts)
 	local request_id = request_nonce
 
 	codeium_status = "waiting"
+	M.redraw_status_line()
 
 	local cancel = server:request_completion(
 		data.document,
