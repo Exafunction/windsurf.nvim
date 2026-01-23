@@ -86,10 +86,18 @@ end
 
 function M.get_uri(path)
 	local info = io.get_system_info()
+
+	-- Remove protocol added by plugin `lambdalisue/vim-suda`
+	path = path:gsub("^suda://", "")
+
+	-- Resolve relative paths (for example when file is opened by plugin `lambdalisue/vim-suda`)
+	path = vim.fn.fnamemodify(path, ":p:h")
+
 	if info.is_windows then
 		path = path:gsub("\\", "/")
 		return "file:///" .. path
 	end
+
 	return "file://" .. path
 end
 
