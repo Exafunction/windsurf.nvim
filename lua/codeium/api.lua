@@ -234,7 +234,9 @@ function Server:start()
 	end
 
 	local function on_output(_, v, j)
-		log.debug(j.pid .. ": " .. v)
+		if v ~= nil then
+			log.debug(j.pid .. ": " .. v)
+		end
 	end
 
 	local api_server_url = "https://"
