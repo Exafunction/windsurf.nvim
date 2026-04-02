@@ -77,6 +77,8 @@ You can globaly enable or disable Codeium Completion with `:Codeium Toggle` comm
 
 - `config_path`: the path to the config file, used to store the API key.
 - `bin_path`: the path to the directory where the Windsurf server will be downloaded to.
+- `manager_path`: the path to the language server manager directory. Defaults to a temporary directory. Set this if you want a persistent manager directory across restarts.
+- `language_server_download_url`: the base URL for downloading the language server binary. Defaults to `"https://github.com"`.
 - `api`: information about the API server to use:
   - `host`: the hostname. Example: `"codeium.example.com"`. Required when using enterprise mode
   - `port`: the port. Defaults to `443`
@@ -84,7 +86,12 @@ You can globaly enable or disable Codeium Completion with `:Codeium Toggle` comm
   - `portal_url`: the portal URL to use (for enterprise mode). Defaults to `host:port`
 - `enterprise_mode`: enable enterprise mode
 - `detect_proxy`: enable or disable proxy detection
+- `quiet`: defaults to `false`. Set `true` to suppress completion error notifications (e.g. on server errors or invalid responses)
 - `enable_chat`: enable chat functionality
+- `enable_local_search`: defaults to `true`. Enable local search functionality in the language server
+- `enable_index_service`: defaults to `true`. Enable the index service for workspace search
+- `search_max_workspace_file_count`: defaults to `5000`. Maximum number of workspace files for search indexing (only used when `enable_index_service` is `true`)
+- `file_watch_max_dir_count`: defaults to `50000`. Maximum number of directories the language server will watch for file changes
 - `enable_cmp_source`: defaults to true. Set `false` to disable registering a `cmp` source
 - `virtual_text`: configuration for showing completions in virtual text
   - `enabled`: defaults to `false`. Set `true` to enable the virtual text feature

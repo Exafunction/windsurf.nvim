@@ -207,7 +207,7 @@ function Server:start()
 		return
 	end
 
-	local manager_dir = config.manager_path
+	local manager_dir = config.options.manager_path
 	if not manager_dir then
 		manager_dir = io.tempdir("codeium/manager")
 		vim.fn.mkdir(manager_dir, "p")
