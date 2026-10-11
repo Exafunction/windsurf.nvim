@@ -68,6 +68,10 @@ After installation and configuration, you will need to authenticate with
 Windsurf. This can be done by running `:Codeium Auth`, copying the token from
 your browser and pasting it into API token request.
 
+If the browser ends up on the Devin site instead of showing a token, open
+<https://windsurf.com/enterprise/account/login?redirect_uri=vim-show-auth-token>,
+sign in, copy the token, and choose "I already have a key" in `:Codeium Auth`.
+
 To use Windsurf Chat, execute the `:Codeium Chat` command. The chat will be opened
 in your default browser using the xdg-open command.
 

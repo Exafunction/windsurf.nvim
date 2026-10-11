@@ -117,6 +117,11 @@ function Server.authenticate()
 		.. "/profile?response_type=token&redirect_uri=vim-show-auth-token&state="
 		.. uuid
 		.. "&scope=openid%20profile%20email&redirect_parameters_type=query"
+	-- The public /profile page now redirects to Devin and never shows the token.
+	-- This page still shows a token that register_user accepts.
+	if not config.options.enterprise_mode then
+		url = "https://windsurf.com/enterprise/account/login?redirect_uri=vim-show-auth-token"
+	end
 
 	local prompt
 	local function on_submit(value)
